@@ -1,0 +1,84 @@
+[
+  {
+    "id": "a2c727320388a03b",
+    "type": "tab",
+    "label": "Flow 1",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "7674de608758eafe",
+    "type": "inject",
+    "z": "a2c727320388a03b",
+    "name": "",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "10",
+    "crontab": "",
+    "once": true,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 250,
+    "y": 180,
+    "wires": [["9cae807f90781964"]]
+  },
+  {
+    "id": "9cae807f90781964",
+    "type": "function",
+    "z": "a2c727320388a03b",
+    "name": "function 1",
+    "func": "msg.payload = Number((Math.random() * 10 + 20).toFixed(2))\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 460,
+    "y": 180,
+    "wires": [["9c6971dfd6c192a2"]]
+  },
+  {
+    "id": "9c6971dfd6c192a2",
+    "type": "influxdb out",
+    "z": "a2c727320388a03b",
+    "influxdb": "b8f8cf26a9ea1600",
+    "name": "temp",
+    "measurement": "room_temperature",
+    "precision": "",
+    "retentionPolicy": "",
+    "database": "database",
+    "precisionV18FluxV20": "ms",
+    "retentionPolicyV18Flux": "",
+    "org": "myorg",
+    "bucket": "mybucket",
+    "x": 670,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "b8f8cf26a9ea1600",
+    "type": "influxdb",
+    "hostname": "127.0.0.1",
+    "port": "8086",
+    "protocol": "http",
+    "database": "database",
+    "name": "db",
+    "usetls": false,
+    "tls": "",
+    "influxdbVersion": "2.0",
+    "url": "http://influxdb:8086",
+    "timeout": "10",
+    "rejectUnauthorized": false
+  }
+]

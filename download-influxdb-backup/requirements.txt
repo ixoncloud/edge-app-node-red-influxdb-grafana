@@ -1,0 +1,5 @@
+Flask
+influxdb-client
+pandas
+flask-socketio
+eventlet

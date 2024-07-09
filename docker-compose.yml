@@ -1,0 +1,59 @@
+services:
+  node-red-influxdb:
+    platform: linux/arm64/v8
+    build:
+      context: ./node-red-influxdb
+      dockerfile: Dockerfile
+    volumes:
+      - nodered-data:/data
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+    ports:
+      - '127.0.0.1:1880:1880'
+    env_file:
+      - configuration.env
+
+  influxdb:
+    platform: linux/arm64/v8
+    image: influxdb:2.7.5-alpine
+    env_file: configuration.env
+    ports:
+      - '127.0.0.1:8086:8086'
+    volumes:
+      - ./:/imports
+      - influxdb-data:/var/lib/influxdb2
+
+  grafana:
+    platform: linux/arm64/v8
+    image: grafana/grafana:10.4.1-ubuntu
+    depends_on:
+      - influxdb
+    env_file: configuration.env
+    links:
+      - influxdb
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/dashboards/:/var/lib/grafana/dashboards/
+
+  download-influxdb-backup:
+    build:
+      context: ./download-influxdb-backup
+      dockerfile: Dockerfile
+    depends_on:
+      - influxdb
+    ports:
+      - '127.0.0.1:3001:80'
+    env_file:
+      - configuration.env
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+
+volumes:
+  nodered-data: {}
+  grafana-data: {}
+  influxdb-data: {}
