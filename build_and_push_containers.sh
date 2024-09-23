@@ -22,8 +22,8 @@ cd grafana/
 docker buildx build --platform linux/arm64/v8 --tag 192.168.140.1:5000/grafana:latest --no-cache --push .
 cd ..
 
-# Navigate to the nodered directory and build the node-red-influxdb image
-cd nodered/
+# Navigate to the node-red-influxdb directory and build the node-red-influxdb image
+cd node-red-influxdb/
 docker buildx build --platform linux/arm64/v8 --tag 192.168.140.1:5000/node-red-influxdb:latest --push .
 cd ..
 
