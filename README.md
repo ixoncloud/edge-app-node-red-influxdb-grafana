@@ -1,5 +1,7 @@
 # Edge App - Node-RED with InfluxDB and Grafana for local data visualization
 
+This project provides a comprehensive solution for collecting, storing, and visualizing data on the IXON SecureEdge Pro gateway. It leverages Node-RED for data collection and processing, InfluxDB for efficient time-series data storage, and Grafana for creating powerful visualizations. This setup allows for local data handling and visualization, reducing latency and enabling real-time monitoring and analysis of industrial processes directly on the edge gateway.
+
 ## Prerequisites
 
 Ensure your environment is properly set up by following this guide: [Running custom Docker applications on the SecureEdge Pro](https://support.ixon.cloud/hc/en-us/articles/14231117531420-Running-custom-Docker-applications-on-the-SecureEdge-Pro).
