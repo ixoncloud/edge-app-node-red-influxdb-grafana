@@ -7,6 +7,9 @@ set -e -x
 # given a different IP address.
 # docker buildx rm secure-edge-pro;
 
+# Remove the existing instance if necessary
+docker buildx rm secure-edge-pro || true
+
 # Create and initialize the build environment.
 docker buildx create --name secure-edge-pro \
                      --config buildkitd-secure-edge-pro.toml
