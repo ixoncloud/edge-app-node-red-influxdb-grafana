@@ -28,8 +28,16 @@ Downloading the backup may take some time, especially if done remotely. To avoid
 
 Run the `build_and_push_containers.sh` script to build and push the containers to the SecureEdge Pro:
 
+For Unix-based systems:
+
 ```bash
 ./build_and_push_containers.sh
+```
+
+For Windows:
+
+```cmd
+build_and_push_containers.cmd
 ```
 
 ### 2. Set Up the Containers on SecureEdge Pro
