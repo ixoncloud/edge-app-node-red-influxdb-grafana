@@ -7,7 +7,18 @@ ENV GF_SECURITY_ADMIN_USER=admin \
     GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource \ 
     DOCKER_INFLUXDB_INIT_ORG="myorg" \
     DOCKER_INFLUXDB_INIT_BUCKET="mybucket" \
-    DOCKER_INFLUXDB_INIT_ADMIN_TOKEN="myadmintoken" 
+    DOCKER_INFLUXDB_INIT_ADMIN_TOKEN="myadmintoken" \
+    # Disable internet-dependent features
+    GF_ANALYTICS_REPORTING_ENABLED=false \
+    GF_ANALYTICS_CHECK_FOR_UPDATES=false \
+    GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES=false \
+    GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS="*" \
+    GF_LIVE_ALLOWED_ORIGINS="*" \
+    # Skip plugin verification and installation from internet
+    GF_PLUGINS_PLUGIN_ADMIN_ENABLED=false
+
+# Copy the custom configuration file
+COPY ./grafana.ini /etc/grafana/grafana.ini
 
 # Copy provisioning files for datasources and dashboards into the container
 COPY ./provisioning/datasources/* /etc/grafana/provisioning/datasources/

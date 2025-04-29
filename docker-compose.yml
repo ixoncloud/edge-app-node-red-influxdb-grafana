@@ -17,7 +17,9 @@ services:
 
   influxdb:
     platform: linux/arm64/v8
-    image: influxdb:2.7.5-alpine
+    build:
+      context: ./influxdb
+      dockerfile: Dockerfile
     env_file: configuration.env
     ports:
       - '127.0.0.1:8086:8086'
@@ -27,7 +29,9 @@ services:
 
   grafana:
     platform: linux/arm64/v8
-    image: grafana/grafana:10.4.1-ubuntu
+    build:
+      context: ./grafana
+      dockerfile: Dockerfile
     depends_on:
       - influxdb
     env_file: configuration.env
