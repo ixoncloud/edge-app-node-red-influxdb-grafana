@@ -4,7 +4,6 @@ FROM grafana/grafana:10.4.1-ubuntu
 # Set Grafana admin user and password
 ENV GF_SECURITY_ADMIN_USER=admin \
     GF_SECURITY_ADMIN_PASSWORD=admin \
-    GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource \ 
     DOCKER_INFLUXDB_INIT_ORG="myorg" \
     DOCKER_INFLUXDB_INIT_BUCKET="mybucket" \
     DOCKER_INFLUXDB_INIT_ADMIN_TOKEN="myadmintoken" \
@@ -16,6 +15,10 @@ ENV GF_SECURITY_ADMIN_USER=admin \
     GF_LIVE_ALLOWED_ORIGINS="*" \
     # Skip plugin verification and installation from internet
     GF_PLUGINS_PLUGIN_ADMIN_ENABLED=false
+
+# Install plugins during build
+RUN grafana-cli --pluginsDir /var/lib/grafana/plugins plugins install grafana-clock-panel && \
+    grafana-cli --pluginsDir /var/lib/grafana/plugins plugins install grafana-simple-json-datasource
 
 # Copy the custom configuration file
 COPY ./grafana.ini /etc/grafana/grafana.ini
