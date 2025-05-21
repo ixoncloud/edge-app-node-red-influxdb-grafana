@@ -2,10 +2,6 @@
 
 This project provides a comprehensive solution for collecting, storing, and visualizing data on the IXON SecureEdge Pro gateway. It leverages Node-RED for data collection and processing, InfluxDB for efficient time-series data storage, and Grafana for creating powerful visualizations. This setup allows for local data handling and visualization, reducing latency and enabling real-time monitoring and analysis of industrial processes directly on the edge gateway.
 
-## Prerequisites
-
-Ensure your environment is properly set up by following this guide: [Running custom Docker applications on the SecureEdge Pro](https://support.ixon.cloud/hc/en-us/articles/14231117531420-Running-custom-Docker-applications-on-the-SecureEdge-Pro).
-
 ## Local Development
 
 docker-compose.yml in combination with configuration.env are provided for local development.
@@ -24,7 +20,19 @@ Downloading the backup may take some time, especially if done remotely. To avoid
 
 ## Steps to Deploy
 
-### 1. Build and Push the containers
+### Prerequisites
+
+Ensure your environment is properly set up by following this guide: [Running custom Docker applications on the SecureEdge Pro](https://support.ixon.cloud/hc/en-us/articles/14231117531420-Running-custom-Docker-applications-on-the-SecureEdge-Pro).
+
+### 1. Download and adjust to your SecureEdge Pro
+
+Download the code of this project and change the IP address in the following files to the LAN IP address of your SecureEge Pro:
+
+- buildkitd-secure-edge-pro.toml
+- build_and_push_containers.sh
+- build_and_push_containers.cmd
+
+### 2. Build and Push the containers
 
 Run the `build_and_push_containers.sh` script to build and push the containers to the SecureEdge Pro:
 
@@ -40,7 +48,7 @@ For Windows:
 build_and_push_containers.cmd
 ```
 
-### 2. Set Up the Containers on SecureEdge Pro
+### 3. Set Up the Containers on SecureEdge Pro
 
 - Access the local web interface of the SecureEdge Pro.
 
